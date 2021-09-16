@@ -41,6 +41,7 @@ async function onSearch(e) {
     refs.galleryList.innerHTML = '';
     
     searchQuery = refs.searchInput.value
+    pageCounter = 1
     const getData = await apiService(searchQuery, pageCounter)
     renderGallery(getData)
 
@@ -59,11 +60,7 @@ async function onLoadMore(){
     pageCounter += 1;
     const getData = await apiService(searchQuery, pageCounter);
     renderGallery(getData);
-    refs.galleryList.lastElementChild.scrollIntoView({
-        behavior: 'smooth',
-        block: 'end',
-    });
-    if (!getData.total) {
+        if (!getData.total) {
         return error({
             title:'Something going wrong!',
             text:'Please, enter another word!',
